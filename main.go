@@ -1,6 +1,6 @@
 package graph
 
-// Map Dependency map information.
+// DependencyMap Dependency map information.
 type DependencyMap struct {
 	Nodes   []string // Nodes The nodes of the map.
 	edge    map[string][]string
@@ -8,7 +8,7 @@ type DependencyMap struct {
 	sorted  []string
 }
 
-// Add Adds a node if it doesnt exist.
+// AddNode Adds a node if it doesnt exist.
 func (m *DependencyMap) AddNode(node string) {
 	for _, item := range m.Nodes {
 		if item == node {
