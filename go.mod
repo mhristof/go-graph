@@ -1,4 +1,4 @@
-module github.com/mhristof/go-dependency-list
+module github.com/mhristof/go-graph
 
 go 1.16
 
