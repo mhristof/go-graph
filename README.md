@@ -1,5 +1,7 @@
 # go-graph
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/mhristof/go-graph)](https://goreportcard.com/report/github.com/mhristof/go-graph)
+
 Graph implementation in golang
 
 ## DependencyMap
