@@ -65,8 +65,8 @@ func TestSort(t *testing.T) {
 			in: DependencyMap{
 				Nodes: []string{"a", "b", "c"},
 				edge: map[string][]string{
-					"a": []string{"b"},
-					"b": []string{"c"},
+					"a": {"b"},
+					"b": {"c"},
 				},
 			},
 			out: []string{
@@ -80,9 +80,9 @@ func TestSort(t *testing.T) {
 			in: DependencyMap{
 				Nodes: []string{"a", "b", "c", "d"},
 				edge: map[string][]string{
-					"a": []string{"b", "c"},
-					"b": []string{"d"},
-					"c": []string{"d"},
+					"a": {"b", "c"},
+					"b": {"d"},
+					"c": {"d"},
 				},
 			},
 			all: true,
@@ -94,12 +94,12 @@ func TestSort(t *testing.T) {
 			in: DependencyMap{
 				Nodes: strings.Fields("a b c d e f g h"),
 				edge: map[string][]string{
-					"a": []string{"c"},
-					"b": []string{"c", "d"},
-					"c": []string{"e"},
-					"d": []string{"f"},
-					"e": []string{"h", "f"},
-					"f": []string{"g"},
+					"a": {"c"},
+					"b": {"c", "d"},
+					"c": {"e"},
+					"d": {"f"},
+					"e": {"h", "f"},
+					"f": {"g"},
 				},
 			},
 			all: true,
@@ -111,12 +111,12 @@ func TestSort(t *testing.T) {
 			in: DependencyMap{
 				Nodes: strings.Fields("a b c d e f g h"),
 				edge: map[string][]string{
-					"a": []string{"c"},
-					"b": []string{"c", "d"},
-					"c": []string{"e"},
-					"d": []string{"f"},
-					"e": []string{"h", "f"},
-					"f": []string{"g"},
+					"a": {"c"},
+					"b": {"c", "d"},
+					"c": {"e"},
+					"d": {"f"},
+					"e": {"h", "f"},
+					"f": {"g"},
 				},
 			},
 			all: false,
@@ -168,12 +168,12 @@ func TestSortAll(t *testing.T) {
 			in: DependencyMap{
 				Nodes: strings.Fields("a b c d e f g h"),
 				edge: map[string][]string{
-					"a": []string{"c"},
-					"b": []string{"c", "d"},
-					"c": []string{"e"},
-					"d": []string{"f"},
-					"e": []string{"h", "f"},
-					"f": []string{"g"},
+					"a": {"c"},
+					"b": {"c", "d"},
+					"c": {"e"},
+					"d": {"f"},
+					"e": {"h", "f"},
+					"f": {"g"},
 				},
 			},
 			out: []string{"h", "g", "f", "e", "c", "a", "d", "b"},
@@ -196,12 +196,12 @@ func TestSortExported(t *testing.T) {
 			in: DependencyMap{
 				Nodes: strings.Fields("a b c d e f g h"),
 				edge: map[string][]string{
-					"a": []string{"c"},
-					"b": []string{"c", "d"},
-					"c": []string{"e"},
-					"d": []string{"f"},
-					"e": []string{"h", "f"},
-					"f": []string{"g"},
+					"a": {"c"},
+					"b": {"c", "d"},
+					"c": {"e"},
+					"d": {"f"},
+					"e": {"h", "f"},
+					"f": {"g"},
 				},
 			},
 			out: []string{"h", "g", "f", "e", "c", "a"},
@@ -231,7 +231,7 @@ func TestEdge(t *testing.T) {
 			out: DependencyMap{
 				Nodes: []string{"a", "b"},
 				edge: map[string][]string{
-					"a": []string{"b"},
+					"a": {"b"},
 				},
 			},
 		},
@@ -240,7 +240,7 @@ func TestEdge(t *testing.T) {
 			in: DependencyMap{
 				Nodes: []string{"a", "b"},
 				edge: map[string][]string{
-					"a": []string{"b"},
+					"a": {"b"},
 				},
 			},
 			source: "a",
@@ -248,7 +248,7 @@ func TestEdge(t *testing.T) {
 			out: DependencyMap{
 				Nodes: []string{"a", "b"},
 				edge: map[string][]string{
-					"a": []string{"b"},
+					"a": {"b"},
 				},
 			},
 		},
