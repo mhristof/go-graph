@@ -156,3 +156,106 @@ func TestDiff(t *testing.T) {
 		assert.Equal(t, test.out, diff(test.this, test.that), test.name)
 	}
 }
+
+func TestSortAll(t *testing.T) {
+	var cases = []struct {
+		name string
+		in   DependencyMap
+		out  []string
+	}{
+		{
+			name: "include unvisited nodes",
+			in: DependencyMap{
+				Nodes: strings.Fields("a b c d e f g h"),
+				edge: map[string][]string{
+					"a": []string{"c"},
+					"b": []string{"c", "d"},
+					"c": []string{"e"},
+					"d": []string{"f"},
+					"e": []string{"h", "f"},
+					"f": []string{"g"},
+				},
+			},
+			out: []string{"h", "g", "f", "e", "c", "a", "d", "b"},
+		},
+	}
+
+	for _, test := range cases {
+		assert.Equal(t, test.out, test.in.SortAll(test.in.Nodes[0]), test.name)
+	}
+}
+
+func TestSortExported(t *testing.T) {
+	var cases = []struct {
+		name string
+		in   DependencyMap
+		out  []string
+	}{
+		{
+			name: "include unvisited nodes",
+			in: DependencyMap{
+				Nodes: strings.Fields("a b c d e f g h"),
+				edge: map[string][]string{
+					"a": []string{"c"},
+					"b": []string{"c", "d"},
+					"c": []string{"e"},
+					"d": []string{"f"},
+					"e": []string{"h", "f"},
+					"f": []string{"g"},
+				},
+			},
+			out: []string{"h", "g", "f", "e", "c", "a"},
+		},
+	}
+
+	for _, test := range cases {
+		assert.Equal(t, test.out, test.in.Sort(test.in.Nodes[0]), test.name)
+	}
+}
+
+func TestEdge(t *testing.T) {
+	var cases = []struct {
+		name   string
+		in     DependencyMap
+		source string
+		dest   string
+		out    DependencyMap
+	}{
+		{
+			name: "new edge",
+			in: DependencyMap{
+				Nodes: []string{"a", "b"},
+			},
+			source: "a",
+			dest:   "b",
+			out: DependencyMap{
+				Nodes: []string{"a", "b"},
+				edge: map[string][]string{
+					"a": []string{"b"},
+				},
+			},
+		},
+		{
+			name: "duplicate edge",
+			in: DependencyMap{
+				Nodes: []string{"a", "b"},
+				edge: map[string][]string{
+					"a": []string{"b"},
+				},
+			},
+			source: "a",
+			dest:   "b",
+			out: DependencyMap{
+				Nodes: []string{"a", "b"},
+				edge: map[string][]string{
+					"a": []string{"b"},
+				},
+			},
+		},
+	}
+
+	for _, test := range cases {
+		test.in.Edge(test.source, test.dest)
+		assert.Equal(t, test.out, test.in, test.name)
+	}
+}

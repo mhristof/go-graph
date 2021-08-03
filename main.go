@@ -25,6 +25,12 @@ func (m *DependencyMap) Edge(source, dest string) {
 		m.edge = make(map[string][]string)
 	}
 
+	for _, node := range m.edge[source] {
+		if node == dest {
+			return
+		}
+	}
+
 	m.edge[source] = append(m.edge[source], dest)
 }
 
